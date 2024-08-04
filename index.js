@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 require('dotenv').config();
 const {dbConnection} = require('./config/db')
@@ -7,8 +7,10 @@ const expressFileUpload = require('express-fileupload')
 const fileuploadRoutes = require('./routes/fileUpload')
 
 app.use(express.json());
-app.use(expressFileUpload());
-
+app.use(expressFileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
 const port = process.env.PORT;
 
 dbConnection();
